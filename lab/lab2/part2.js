@@ -23,9 +23,32 @@ variable "largeStationList".
 Let's say we only care about the final count of bike share locations with more than 20 docks.
 Calculate the value by using _.countBy and set your answer to variable "largeStationCount".
 ===================== */
+/*
+function compareObjectItemValue (array,objValue,test){
+  var someArray=[];
+  for(i=0; i<array.length;i++){
+    if(array[i][objValue] > test){
+      someArray.push(array[i]);
+    }
+  } return someArray;
+}
+
+function countObjectItemValue (array,objValue,test){
+  var count=0;
+  for(i=0; i<array.length;i++){
+    if(array[i][objValue] > test){
+      count=count+1;
+    }
+  } return count;
+}
+
+var largeStationList = compareObjectItemValue(bikeArrayClean,3,20);
+var largeStationCount = countObjectItemValue(data,3,20);
+*/
 
 var data = bikeArrayClean;
 
-var largeStationList;
+var largeStationList = _.filter(data,function(object){return object[3]>20;});
 
-var largeStationCount;
+//added _.pick to get only one; could also wrap in _.values for array without "true" as name
+var largeStationCount = _.pick(_.countBy(data,function(object){return object[3]>20;}),"true");
